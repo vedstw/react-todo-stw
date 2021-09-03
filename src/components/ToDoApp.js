@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import Page from './Page'
 import Section from "./Section";
-import TaskEditor from './TaskEditor'
+import Task from './Task'
 
 const initialTasks = [
 		{
@@ -23,7 +23,7 @@ const initialTasks = [
 
 function ToDoApp() {
 	const [tasks, setTasks] = useState(initialTasks)
-	const [maxID, setMaxID] = useState(3)
+	const [maxID, setMaxID] = useState(tasks.length)
 	const toggleWichtig = (clicked) => setTasks(tasks.map(task => task.id === clicked ? {...task, wichtig: !task.wichtig} : task))
 	const deleteTask = (clicked) => setTasks(tasks.filter((task => task.id !== clicked)))
 	const createID = () => {
@@ -40,11 +40,15 @@ function ToDoApp() {
 		})
 		setTasks(tasks)
 	}
+	const updateTask = (changedID, newText) => {
+		console.log('update ' + changedID + ': ' + newText)
+		setTasks(tasks.map(task => task.id === changedID ? {...task, beschreibung: newText} : task))
+	}
 	return (
 		<Page addTask={addTask}>
 			<Section title="To Do">
 				{tasks.length > 0 ? tasks.map(task =>
-					<TaskEditor key={task.id} task={task} onToggle={toggleWichtig} onDelete={deleteTask}/>)
+					<Task key={task.id} task={task} toggleImportant={toggleWichtig} onUpdate={updateTask} onDelete={deleteTask}/>)
 					: "No tasks."}
 			</Section>
 		</Page>

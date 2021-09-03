@@ -9,12 +9,9 @@ function TopBar({addTask}) {
 				<Form inline>
 					<FormControl type="text" className="mr-sm-2"
 								 value={text}
-								 placeholder="enter new to do item"
-								 onChange={e => {
-									 setText(e.target.value);
-									 console.log(text);
-								 }
-								 }/>
+								 placeholder="enter new To Do"
+								 onChange={e => setText(e.target.value)}
+					/>
 					<Button variant="outline-success" onClick={() => addTask(text)}>Add</Button>
 				</Form>
 			</Navbar>

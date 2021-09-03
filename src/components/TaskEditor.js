@@ -1,16 +1,20 @@
 import {useState} from 'react'
-import {FaTimes} from 'react-icons/fa'
-import {BiPencil} from "react-icons/bi";
+import {BsCheck, FaRegThumbsDown} from "react-icons/all";
 
-function TaskEditor({task, onToggle, onDelete}) {
+function TaskEditor({task, setEdit, onUpdate}) {
+    const [text, setText] = useState(task.beschreibung)
+    const update = ()=> {
+        setEdit(false)
+        onUpdate(task.id, text)
+    }
     return (
-      <div className={`task ${task.wichtig ? 'alert' : ''}`} onDoubleClick={() => onToggle(task.id)}>
-          {task.beschreibung}
-          <div className='icons'>
-            <BiPencil/>
-            <FaTimes />
-          </div>
-      </div>
+          <form className='task'>
+              <input type='text' className='wide' value={text} onChange={e=>setText(e.target.value)}/>
+              <div className='icons'>
+                  <FaRegThumbsDown className='red' onClick={()=>setEdit(false)}>Revert</FaRegThumbsDown>
+                  <BsCheck className='green' onClick={update}>Save</BsCheck>
+              </div>
+          </form>
     );
 }
 

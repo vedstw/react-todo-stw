@@ -14,19 +14,34 @@ code {
 
 .task {
   display: flex;
+  justify-content: space-between;
   background-color: white;
   margin: 5px;
   padding: 5px;
   width: auto;
 }
 
+.wide {
+  flex-grow: 1;
+}
+
 .icons {
   color:grey;
-  display: flex;
-  justify-content: flex-end
 }
 
 .alert {
   color: red;
   font-weight: bold;
+}
+
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
+.gray {
+  color: gray;
 }

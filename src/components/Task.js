@@ -1,13 +1,14 @@
 import {useState} from 'react'
 import TaskViewer from "./TaskViewer";
+import TaskEditor from "./TaskEditor";
 
-function Task({task, onToggle, onUpdate, onDelete}) {
+function Task({task, toggleImportant, onUpdate, onDelete}) {
     const [editMode, setEditMode] = useState(false)
     return (
-      <div className={`task ${task.wichtig ? 'alert' : ''}`} onDoubleClick={() => toggle(task.id)}>
+      <div>
           {editMode ?
-              <TaskEditor task={task} toggleEdit={setEditMode} onUpdate={onUpdate}/> :
-              <TaskViewer task={task} toggleEdit={setEditMode} onDelete={onDelete}/>}
+              <TaskEditor task={task} setEdit={setEditMode} onUpdate={onUpdate}/> :
+              <TaskViewer task={task} setEdit={setEditMode} onDelete={onDelete} toggleImportant={toggleImportant}/>}
       </div>
     );
 }
